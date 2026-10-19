@@ -1,0 +1,12 @@
+rule,n
+IRIS reaches matched to SWORD v17b,186320
+"combined slope, >= 3 crossings",106837
+"reach type 1, lakeflag 0, no obstruction",89985
+"width >= 100 m, length >= 5 km",44338
+IRIS median slope > 0,44337
+sampled af,250
+sampled as,250
+sampled eu,250
+sampled na,250
+sampled oc,250
+sampled sa,250

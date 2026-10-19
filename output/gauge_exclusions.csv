@@ -1,0 +1,10 @@
+rule,n_remaining
+stream sites with continuous water level 2023-09..2026-06,10742
+datum NAVD88,8993
+datum from a survey method,8077
+stated datum accuracy <= 0.5 ft,7950
+"within max(300 m, node width) of a SWORD node",1507
+reach type river (1),1301
+node not on a lake (lakeflag 0),1298
+drainage area ratio 0.8-1.25 (or not available),1071
+one gauge per node,1068
