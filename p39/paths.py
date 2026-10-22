@@ -19,7 +19,7 @@ TEX.mkdir(parents=True, exist_ok=True)
 
 HYDROCRON = "https://soto.podaac.earthdatacloud.nasa.gov/hydrocron/v1/timeseries"
 COLLECTION = "SWOT_L2_HR_RiverSP_D"
-USGS_OGC = "https://api.waterdata.usgs.gov/ogcapi/v0"
+USGS_OGC = "https://api.waterdata.usgs.gov/ogcapi/v1"
 START = "2023-07-26T00:00:00Z"     # start of the SWOT science orbit
 END = "2026-10-01T00:00:00Z"
 

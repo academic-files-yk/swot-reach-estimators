@@ -22,7 +22,7 @@ def main():
     est = [e for e in LAB if e in r["estimator"].unique()]
     wide = r.pivot_table(index="reach_id", columns="estimator", values="err_mm_km").dropna(subset=est)
     r = r[r["reach_id"].isin(wide.index)]
-    fig, axs = plt.subplots(1, 4, figsize=(F.COL2, 0.27 * F.COL2),
+    fig, axs = plt.subplots(1, 4, figsize=(F.COL2, 0.30 * F.COL2),
                             gridspec_kw={"wspace": 0.42})
     lim = (1, 3000)
     for ax, e, letter in ((axs[0], "official", "a"), (axs[1], "theilsen", "b")):
@@ -45,7 +45,7 @@ def main():
     ax.axvline(17, color=F.INK2, lw=0.5, ls="--")
     ax.set_xscale("log"); ax.set_xlim(1, 1000); ax.set_ylim(0, 1)
     ax.set_xlabel("|Reach-median slope error| (mm/km)"); ax.set_ylabel("Cumulative share of reaches")
-    ax.legend(loc="lower right", fontsize=5.6, handlelength=1.2)
+    handles, labels = ax.get_legend_handles_labels()   # one legend for (c) and (d), above the panels
     F.panel(ax, "c", "All estimators")
     ax = axs[3]
     p = pd.read_parquet(RESULTS / "slope_pass.parquet")
@@ -64,7 +64,9 @@ def main():
     ax.set_xlabel("Observed end nodes"); ax.set_ylabel("Single-overpass $|e|_{68}$ (mm/km)")
     ax.set_ylim(0, None)
     F.panel(ax, "d", "Overpass errors")
-    fig.subplots_adjust(left=0.065, right=0.995, bottom=0.2, top=0.88)
+    fig.legend(handles, labels, loc="upper center", ncol=len(labels), fontsize=5.8, handlelength=1.4,
+               columnspacing=1.2, bbox_to_anchor=(0.5, 1.0))
+    fig.subplots_adjust(left=0.065, right=0.995, bottom=0.18, top=0.80)
     F.save(fig, "Fig3_slope", FIGURES)
     m.groupby(["ends", "estimator"])["err_mm_km"].agg(lambda x: np.quantile(np.abs(x), .68)) \
         .unstack().to_csv(OUTPUT / "slope_by_endnodes.csv")

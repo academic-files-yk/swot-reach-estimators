@@ -37,8 +37,9 @@ def slope_table():
         rows.append(" & ".join(cells) + " \\\\")
     n = int(s.loc["official", "n"])
     tex = r"""\begin{table*}[!t]
-\caption{Reach-Median Slope Against IRIS ($n=%d$ Reaches, Clean Node Set)}\label{tab:slope}
+\caption{Reach-median slope against IRIS ($n=%d$ reaches, clean node set).}\label{tab:slope}
 \centering\footnotesize
+\setlength{\tabcolsep}{2.5pt}
 \begin{tabular}{@{}lccccc*{6}{c}@{}}
 \toprule
  & $|e|_{68}$ (95\%% CI) & Median $|e|$ & $\le$17 mm/km & $\hat S\le0$ & $|\Delta Q|_{68}$ & \multicolumn{6}{c}{$|e|_{68}$ by continent (mm/km)} \\
@@ -81,7 +82,7 @@ def sample_table():
             .replace("slope > 0", "slope $>0$").replace("max(300 m, node width)", "$\\max$(300 m, width)")
             .replace("stream sites", "Stream gauges").replace("(1)", ""))
     tex = r"""\begin{table}[!t]
-\caption{Sample Selection}\label{tab:samples}
+\caption{Sample selection.}\label{tab:samples}
 \centering\footnotesize
 \begin{tabular}{@{}lr@{}}
 \toprule
@@ -115,7 +116,7 @@ def wse_table():
         rows.append(f"{LAB[e]} & {minus(100 * a.loc[e, 'med'], '{:.1f}')} & {pa} & {pr} \\\\")
     n = int(a.loc["official", "n"])
     tex = r"""\begin{table}[!t]
-\caption{WSE at the Gauge Location (Clean Node Set, $n=%s$ Overpasses)}\label{tab:wse}
+\caption{WSE at the gauge location (clean node set, $n=%s$ overpasses).}\label{tab:wse}
 \centering\footnotesize
 \setlength{\tabcolsep}{3pt}
 \begin{tabular}{@{}lccc@{}}
@@ -150,7 +151,7 @@ def sensitivity_table():
     for r in s[s.quantity.str.startswith("WSE")].itertuples():
         rows.append(f"{lab[r.case]} & {r.official:.1f} & {r.bayes_s2:.1f} & {r.wls:.1f} & {r.huber:.1f} & {r.n:,} \\\\")
     tex = r"""\begin{table}[!t]
-\caption{Sensitivity of the Estimator Ranking}\label{tab:sens}
+\caption{Sensitivity of the estimator ranking.}\label{tab:sens}
 \centering\footnotesize
 \setlength{\tabcolsep}{3pt}
 \begin{tabular}{@{}lccccr@{}}
@@ -184,7 +185,7 @@ def simulation_table():
         rows.append(f"{k:g} & " + " & ".join(cells) + " \\\\")
     n = int(s.n.min())
     tex = r"""\begin{table}[!t]
-\caption{Simulated Median Relative Slope Bias (\%%)}\label{tab:sim}
+\caption{Simulated median relative slope bias (\%%).}\label{tab:sim}
 \centering\footnotesize
 \setlength{\tabcolsep}{2.5pt}
 \begin{tabular}{@{}lcccccc@{}}

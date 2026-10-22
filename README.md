@@ -2,7 +2,7 @@
 
 Code for the manuscript
 
-> Kaya, Y. *Diagnosing the Operational Reach Estimator of SWOT River Products With Simulations, Datum-Audited Gauges, and ICESat-2 Slopes.* Submitted to *IEEE Transactions on Geoscience and Remote Sensing*.
+> Kaya, Y. *Diagnosing the operational reach estimator of SWOT river products with simulations, datum-audited gauges and ICESat-2 slopes.* Submitted to *Advances in Space Research*.
 
 The scripts download all public inputs, rebuild the operational SWOT RiverSP Version D reach values from the
 node product, re-implement the Bayesian node-height reconstruction, apply all reach estimators to identical
@@ -18,12 +18,21 @@ macros are produced by `18_numbers.py` and the tables by `19_tables.py`.
 | SWORD v17b | Zenodo, doi:10.5281/zenodo.15299138 | 01, 04b |
 | IRIS v3.4 (ICESat-2 river surface slope) | Zenodo, doi:10.5281/zenodo.23233774 | 08 |
 | USGS stream gauges: metadata | USGS Water Data API (OGC API) | 02 |
-| USGS instantaneous water level (63160, 00065) | USGS NWIS instantaneous-values service | 05 |
+| USGS instantaneous water level (63160, 00065) | Retrieved from the legacy NWIS instantaneous-values service on 12–13 Oct 2026 and archived in `data/usgs_gauges_used.zip` (public domain, USGS); `05` downloads the same series from the USGS Water Data API | 05 |
 | Boundaries for Fig. 2 | U.S. Census Bureau cartographic boundary file 2024 (states 1:20M); Natural Earth 1:50m countries v5.1.1 | 13 |
 
 Large inputs and intermediate files go to `~/swot_p39_work` (override with `P39_WORK`):
 `sword/netcdf/*_sword_v17b.nc`, `iris/IRIS_3.4.nc`, `map/`, and the folders written by the scripts
 (`data/`, `swot/reach`, `swot/node`, `gauges/usgs`, `results/`).
+
+### Note on the USGS gauge archive
+
+The legacy NWIS services are decommissioned on 22 February 2027, so `05_usgs_series.py` uses the
+USGS Water Data API (`continuous` collection). The numbers in the paper come from the archived values in
+`data/usgs_gauges_used.zip`, which `run_all.sh` unpacks by default. A check on 10 randomly drawn gauges
+(22 Oct 2026) found 7,117 of 7,219 archived values (98.6%) returned unchanged by the new API; the
+differences come from later revision of provisional values by USGS (at most 0.16 ft at one gauge) and
+from provisional values no longer served. Set `P39_REFRESH_GAUGES=1` to download the gauges again.
 
 ## Environment
 

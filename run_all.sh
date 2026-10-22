@@ -9,7 +9,14 @@ python 04b_neighbour_list.py
 python 04_hydrocron_download.py $W/data/gauge_match.csv 12
 python 04_hydrocron_download.py $W/data/iris_sample.csv 12
 python 04_hydrocron_download.py $W/data/neighbour_download.csv 12
-python 05_usgs_series.py 6
+# Gauge series: the paper uses the values retrieved from the legacy NWIS service on 12-13 October 2026,
+# archived in data/usgs_gauges_used.zip. Set P39_REFRESH_GAUGES=1 to download them again from the
+# USGS Water Data API instead (values can differ slightly because USGS revises provisional data).
+if [ "${P39_REFRESH_GAUGES:-0}" = "1" ]; then
+  python 05_usgs_series.py 6
+else
+  mkdir -p $W/gauges && unzip -oq data/usgs_gauges_used.zip -d $W/gauges
+fi
 python 06_reach_estimates.py $W/data/gauge_match.csv gauge_estimates
 python 06_reach_estimates.py $W/data/iris_sample.csv iris_estimates
 python 07_wse_eval.py

@@ -32,7 +32,7 @@ def main():
     d = d[(d["node_set"] == "clean") & ~d["screened"]]
     est = [e for e in EST if d[e + "_err"].notna().any()]
     d = d.dropna(subset=[e + "_err" for e in WSE_REQUIRED])
-    fig, axs = plt.subplots(1, 3, figsize=(F.COL2, 0.3 * F.COL2), gridspec_kw={"wspace": 0.32})
+    fig, axs = plt.subplots(1, 3, figsize=(F.COL2, 0.33 * F.COL2), gridspec_kw={"wspace": 0.32})
     for e in est:
         ecdf(axs[0], d[e + "_err"].values, color=COL[e], lw=0.9, label=LAB[e])
         rel = d[e + "_err"] - d.groupby("site")[e + "_err"].transform("median")
@@ -43,7 +43,7 @@ def main():
         ax.set_xlabel("|WSE error| (cm)")
         F.panel(ax, letter, t)
     axs[0].set_ylabel("Cumulative share of overpasses")
-    axs[1].legend(loc="lower right", fontsize=5.6, handlelength=1.2)
+    handles, labels = axs[1].get_legend_handles_labels()   # shared by (a) and (b), placed above the panels
     gm = pd.read_csv(DATA / "gauge_match.csv").set_index("site")
     g = d.groupby("site").agg(off=("official_sm_err", "median"), pc=("parameter_code", "first"))
     g = g.join(gm[["lat", "altitude_method_code"]])
@@ -58,12 +58,15 @@ def main():
     ax.axhline(0, color=F.INK2, lw=0.5)
     ax.set_ylim(-60, 80)
     ax.set_xlabel("Gauge latitude (°N)"); ax.set_ylabel("Per-gauge median error (cm)")
-    ax.legend(loc="upper right", fontsize=5.6, markerscale=2, handlelength=1.2, frameon=True,
-              facecolor="white", edgecolor="none", framealpha=0.9)
+    ax.legend(loc="lower right", bbox_to_anchor=(1.0, 1.08), ncol=3, fontsize=5.8, markerscale=2, handlelength=1.0, columnspacing=0.8,
+              borderaxespad=0)
     out = ((100 * g["off"] < -60) | (100 * g["off"] > 80)).sum()
-    ax.text(0.02, 0.03, f"outside axis: {out}", transform=ax.transAxes, fontsize=5.6, color=F.INK2)
+    ax.text(1.0, 1.01, f"outside axis: {out}", transform=ax.transAxes, fontsize=5.6, color=F.INK2,
+            ha="right", va="bottom")
     F.panel(ax, "c", "SM-node datum audit")
-    fig.subplots_adjust(left=0.06, right=0.995, bottom=0.17, top=0.9)
+    fig.legend(handles, labels, loc="upper left", ncol=5, fontsize=5.8, handlelength=1.4, columnspacing=1.2,
+               bbox_to_anchor=(0.05, 1.0))
+    fig.subplots_adjust(left=0.06, right=0.995, bottom=0.16, top=0.78)
     F.save(fig, "Fig4_wse", FIGURES)
     rows = [dict(group="all", n=len(g), median_cm=100 * g["off"].median(),
                  q25_cm=100 * g["off"].quantile(.25), q75_cm=100 * g["off"].quantile(.75))]

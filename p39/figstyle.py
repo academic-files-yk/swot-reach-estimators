@@ -1,4 +1,4 @@
-"""Figure style for IEEE Transactions (single column 88.9 mm, double column 181 mm).
+"""Figure style for journal print (single column 88.9 mm, double column 181 mm).
 
 style()               matplotlib settings for 7-8 pt print size and thin lines
 panel(ax, "a", text)  left-aligned "(a) text" panel label
