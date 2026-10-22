@@ -2,7 +2,7 @@
 
 Code for the manuscript
 
-> Kaya, Y. *Diagnosing the operational reach estimator of SWOT river products with simulations, datum-audited gauges and ICESat-2 slopes.* Submitted to *Advances in Space Research*.
+> Kaya, Y. *Diagnosing the operational reach estimator of SWOT river products with simulations, datum-audited gauges and ICESat-2 slopes.* Submitted to *Remote Sensing of Environment*.
 
 The scripts download all public inputs, rebuild the operational SWOT RiverSP Version D reach values from the
 node product, re-implement the Bayesian node-height reconstruction, apply all reach estimators to identical
