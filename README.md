@@ -2,7 +2,7 @@
 
 Code for the manuscript
 
-> Kaya, Y. *Diagnosing the operational reach estimator of SWOT river products with simulations, datum-audited gauges and ICESat-2 slopes.* Submitted to *Remote Sensing of Environment*.
+> Kaya, Y. *Diagnosing the operational reach estimator of SWOT river products with simulations, datum-audited gauges and ICESat-2 slopes.* Submitted to *Journal of Geodesy*.
 
 The scripts download all public inputs, rebuild the operational SWOT RiverSP Version D reach values from the
 node product, re-implement the Bayesian node-height reconstruction, apply all reach estimators to identical
@@ -79,7 +79,7 @@ before the comparisons were run.
 - `sets.py`: shared definition of the WSE evaluation sample.
 - `geodesy.py`: NAVD88 -> GEOID18 -> NAD83(2011) -> ITRF2014 + permanent tide.
 - `stats.py`: error summaries, reach/gauge cluster bootstrap, paired Wilcoxon tests.
-- `figstyle.py`: IEEE figure sizes, overlap check, PDF + 600 dpi PNG/TIFF output.
+- `figstyle.py`: Journal figure sizes, overlap check, PDF + 600 dpi PNG/TIFF output.
 
 ## License
 
